@@ -223,6 +223,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-size: .75em;
   font-weight: 600;
 }
+.hero-title-em {
+  color: var(--gold);
+  font-size: .82em;
+  font-weight: 700;
+  display: block;
+  margin-top: 4px;
+}
+.hero-meta {
+  font-size: clamp(12px, 1.5vw, 15px);
+  color: rgba(255,255,255,.5);
+  letter-spacing: .12em;
+  margin-bottom: 20px;
+}
 .hero-sub {
   font-size: clamp(14px, 2vw, 18px);
   color: rgba(255,255,255,.8);
