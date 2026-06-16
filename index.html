@@ -3,359 +3,759 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="다시 빛나는 동(EAST)-구(SPHERE) — 대구 동구 디지털 랜드마크 프로젝트">
+  <meta name="description" content="대구 동구 디지털 랜드마크 프로젝트 — 동구(EAST SPHERE) 조성사업 제안서">
   <meta property="og:title" content="동구(EAST SPHERE) | 대구 동구 디지털 랜드마크 프로젝트">
+  <meta property="og:description" content="금호강 관광벨트의 보이는 상징이자 디지털 거점 인프라, 동구(EAST SPHERE).">
   <meta property="og:image" content="assets/images/Main.png">
   <meta name="theme-color" content="#040d1a">
-  <title>동구(EAST SPHERE) | 다시 빛나는 동구</title>
+  <title>동구(EAST SPHERE) | 대구 동구 디지털 랜드마크 프로젝트</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700;900&display=swap');
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --navy: #040d1a;
-      --gold: #c8a45a;
-      --gold-bright: #e8c87a;
-      --white: #ffffff;
-      --font: 'Pretendard', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
-    }
-
+    /* ── 랜딩 섹션 전용 스타일 ── */
     @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+      .landing * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
     }
 
-    html, body {
-      width: 100%; height: 100%;
+    .landing {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 560px;
       overflow: hidden;
-      background: var(--navy);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
+      background: #040d1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* ── 캔버스 별 배경 ── */
     #starCanvas {
-      position: fixed;
+      position: absolute;
       inset: 0;
       z-index: 0;
     }
 
-    /* ── 구체 후광 ── */
-    .sphere-glow {
-      position: fixed;
-      top: 50%;
-      left: 50%;
+    .landing-glow {
+      position: absolute;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       width: min(600px, 90vw);
       height: min(600px, 90vw);
       border-radius: 50%;
-      background: radial-gradient(
-        circle at center,
-        rgba(200,164,90,.12) 0%,
-        rgba(42,80,140,.08) 40%,
-        transparent 70%
-      );
+      background: radial-gradient(circle, rgba(200,164,90,.11) 0%, rgba(42,80,140,.07) 40%, transparent 70%);
       z-index: 1;
-      animation: spherePulse 4s ease-in-out infinite;
       opacity: 0;
-      animation-delay: 1s;
-      animation-fill-mode: forwards;
+      animation: ldGlow 3.5s ease 1s forwards;
     }
-    @keyframes spherePulse {
-      0%   { opacity: 0; transform: translate(-50%,-50%) scale(.85); }
-      30%  { opacity: 1; }
-      70%  { opacity: .8; }
-      100% { opacity: .4; transform: translate(-50%,-50%) scale(1.05); }
+    @keyframes ldGlow {
+      0%   { opacity: 0; transform: translate(-50%,-50%) scale(.8); }
+      40%  { opacity: 1; }
+      100% { opacity: .5; transform: translate(-50%,-50%) scale(1.08); }
     }
 
-    /* ── 외곽 링 ── */
-    .sphere-ring {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      width: min(480px, 80vw);
-      height: min(480px, 80vw);
+    .landing-ring {
+      position: absolute;
+      top: 50%; left: 50%;
       border-radius: 50%;
-      border: 1px solid rgba(200,164,90,.15);
-      transform: translate(-50%,-50%) scale(.7);
+      border: 1px solid rgba(200,164,90,.14);
+      transform: translate(-50%,-50%) scale(.65);
       z-index: 1;
       opacity: 0;
-      animation: ringReveal 1.8s cubic-bezier(.4,0,.2,1) 1.2s forwards;
+      animation: ldRing 1.6s cubic-bezier(.4,0,.2,1) forwards;
     }
-    .sphere-ring:nth-child(2) {
-      width: min(560px, 94vw);
-      height: min(560px, 94vw);
-      border-color: rgba(200,164,90,.08);
-      animation-delay: 1.5s;
-    }
-    @keyframes ringReveal {
-      to { opacity: 1; transform: translate(-50%,-50%) scale(1); }
+    .landing-ring:nth-child(1) { width: min(470px,78vw); height: min(470px,78vw); animation-delay: 1.2s; }
+    .landing-ring:nth-child(2) { width: min(560px,93vw); height: min(560px,93vw); border-color: rgba(200,164,90,.07); animation-delay: 1.5s; }
+    @keyframes ldRing { to { opacity: 1; transform: translate(-50%,-50%) scale(1); } }
+
+    .landing-scanline {
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,.04) 3px, rgba(0,0,0,.04) 4px);
     }
 
-    /* ── 중앙 콘텐츠 ── */
-    .stage {
-      position: fixed;
-      inset: 0;
+    /* 텍스트 스테이지 */
+    .landing-stage {
+      position: relative;
       z-index: 10;
+      text-align: center;
+      padding: 0 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 40px 24px;
-      gap: 0;
     }
 
-    /* 위 레이블 */
-    .label-top {
-      font-size: clamp(10px, 1.4vw, 13px);
+    .ld-label {
+      font-size: clamp(9px, 1.3vw, 12px);
       font-weight: 500;
       letter-spacing: .3em;
       text-transform: uppercase;
-      color: rgba(200,164,90,.7);
+      color: rgba(200,164,90,.65);
       opacity: 0;
-      transform: translateY(-16px);
-      animation: fadeUp .9s ease .4s forwards;
-      margin-bottom: clamp(28px, 5vh, 52px);
+      transform: translateY(-12px);
+      animation: ldFadeUp .9s ease .4s forwards;
+      margin-bottom: clamp(24px, 5vh, 52px);
     }
-
-    /* "다시 빛나는" */
-    .line-sub {
-      font-size: clamp(18px, 3.5vw, 32px);
+    .ld-sub {
+      font-size: clamp(16px, 3.2vw, 30px);
       font-weight: 300;
-      color: rgba(255,255,255,.65);
-      letter-spacing: .12em;
+      color: rgba(255,255,255,.6);
+      letter-spacing: .14em;
       opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 1s ease 1s forwards;
-      margin-bottom: clamp(14px, 2.5vh, 28px);
+      transform: translateY(16px);
+      animation: ldFadeUp .9s ease 1s forwards;
+      margin-bottom: clamp(10px, 2vh, 22px);
     }
-
-    /* 메인 타이틀 */
-    .line-main {
+    .ld-main {
       display: flex;
       align-items: baseline;
       justify-content: center;
-      gap: clamp(6px, 1.5vw, 20px);
+      gap: clamp(4px, 1.2vw, 18px);
       flex-wrap: wrap;
       line-height: 1;
-      margin-bottom: clamp(24px, 4vh, 44px);
+      margin-bottom: clamp(40px, 8vh, 80px);
     }
-
-    .word-east {
-      font-size: clamp(52px, 11vw, 110px);
+    .ld-east {
+      font-size: clamp(48px, 10vw, 106px);
       font-weight: 900;
-      color: var(--white);
+      color: #ffffff;
       letter-spacing: -.02em;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s cubic-bezier(.2,.8,.4,1) 1.7s forwards;
-      text-shadow: 0 0 60px rgba(200,164,90,.25);
+      transform: translateY(28px);
+      animation: ldFadeUp 1s cubic-bezier(.2,.8,.4,1) 1.6s forwards;
+      text-shadow: 0 0 60px rgba(200,164,90,.2);
+      font-family: 'Pretendard','Noto Sans KR',sans-serif;
     }
-
-    .divider-dash {
-      font-size: clamp(36px, 7vw, 76px);
+    .ld-dash {
+      font-size: clamp(34px, 6.5vw, 72px);
       font-weight: 200;
-      color: var(--gold);
+      color: #c8a45a;
       opacity: 0;
-      animation: fadeIn .7s ease 2.3s forwards;
+      animation: ldFadeIn .6s ease 2.2s forwards;
     }
-
-    .word-sphere {
-      font-size: clamp(52px, 11vw, 110px);
+    .ld-sphere {
+      font-size: clamp(48px, 10vw, 106px);
       font-weight: 900;
-      color: var(--gold);
+      color: #c8a45a;
       letter-spacing: -.02em;
       opacity: 0;
-      transform: translateY(30px);
-      animation: fadeUp 1s cubic-bezier(.2,.8,.4,1) 2.4s forwards;
-      text-shadow: 0 0 80px rgba(200,164,90,.45), 0 0 160px rgba(200,164,90,.2);
+      transform: translateY(28px);
+      animation: ldFadeUp 1s cubic-bezier(.2,.8,.4,1) 2.3s forwards;
+      text-shadow: 0 0 80px rgba(200,164,90,.5), 0 0 160px rgba(200,164,90,.2);
+      font-family: 'Pretendard','Noto Sans KR',sans-serif;
     }
 
-    /* 하단 설명 */
-    .line-desc {
-      font-size: clamp(12px, 1.6vw, 15px);
-      font-weight: 400;
-      color: rgba(255,255,255,.45);
-      letter-spacing: .1em;
-      opacity: 0;
-      animation: fadeIn .8s ease 3.3s forwards;
-      margin-bottom: clamp(36px, 6vh, 64px);
-    }
-
-    /* CTA */
-    .cta-wrap {
+    /* 스크롤 힌트 */
+    .ld-scroll {
       display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
       opacity: 0;
-      animation: fadeIn .9s ease 3.8s forwards;
-    }
-
-    .btn-enter {
-      position: relative;
-      padding: 15px 44px;
-      font-family: var(--font);
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      color: var(--navy);
-      background: var(--gold);
-      border: none;
-      border-radius: 3px;
+      animation: ldFadeIn .8s ease 3.3s forwards;
       cursor: pointer;
-      transition: background .3s, transform .2s, box-shadow .3s;
-      min-height: 48px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
     }
-    .btn-enter:hover {
-      background: var(--gold-bright);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(200,164,90,.5);
-    }
-
-    .btn-skip {
-      padding: 15px 32px;
-      font-family: var(--font);
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: .06em;
-      color: rgba(255,255,255,.45);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: 3px;
-      cursor: pointer;
-      transition: border-color .3s, color .3s;
-      min-height: 48px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-    }
-    .btn-skip:hover {
-      border-color: rgba(255,255,255,.35);
-      color: rgba(255,255,255,.7);
-    }
-
-    /* 하단 저작권 */
-    .footer-credit {
-      position: fixed;
-      bottom: 28px;
-      left: 0; right: 0;
-      text-align: center;
+    .ld-scroll-text {
       font-size: 11px;
-      letter-spacing: .1em;
-      color: rgba(255,255,255,.18);
-      z-index: 10;
-      opacity: 0;
-      animation: fadeIn .8s ease 4.4s forwards;
+      letter-spacing: .18em;
+      color: rgba(255,255,255,.35);
     }
+    .ld-scroll-arrow {
+      width: 18px; height: 18px;
+      border-right: 1.5px solid rgba(255,255,255,.3);
+      border-bottom: 1.5px solid rgba(255,255,255,.3);
+      transform: rotate(45deg);
+      animation: ldBounce 1.8s ease infinite 3.5s;
+    }
+    @keyframes ldFadeUp  { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+    @keyframes ldFadeIn  { from{opacity:0;} to{opacity:1;} }
+    @keyframes ldBounce  { 0%,100%{transform:rotate(45deg) translateY(0);} 50%{transform:rotate(45deg) translateY(5px);} }
 
-    /* 스캔라인 효과 */
-    .scanline {
-      position: fixed;
-      inset: 0;
-      z-index: 2;
-      background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 3px,
-        rgba(0,0,0,.04) 3px,
-        rgba(0,0,0,.04) 4px
-      );
+    /* 랜딩에서 히어로로의 크로스페이드 */
+    .landing::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, #040d1a);
+      z-index: 5;
       pointer-events: none;
     }
 
-    /* 애니메이션 키프레임 */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* 네이비 히어로 오버레이가 랜딩과 자연스럽게 연결 */
+    .hero { margin-top: 0; }
+
+    /* nav: 랜딩 구간에서 숨김 */
+    .nav.nav-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity .4s ease, transform .4s ease;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
+    .nav {
+      transition: opacity .4s ease, transform .4s ease, background .3s ease;
     }
   </style>
 </head>
 <body>
 
-  <canvas id="starCanvas" aria-hidden="true"></canvas>
-  <div class="sphere-glow" aria-hidden="true"></div>
-  <div class="sphere-ring" aria-hidden="true"></div>
-  <div class="sphere-ring" aria-hidden="true"></div>
-  <div class="scanline" aria-hidden="true"></div>
+  <!-- ══════════════════════════════
+       LANDING SECTION
+  ══════════════════════════════ -->
+  <section class="landing" id="landing" aria-label="랜딩 인트로">
+    <canvas id="starCanvas" aria-hidden="true"></canvas>
+    <div class="landing-glow" aria-hidden="true"></div>
+    <div class="landing-ring" aria-hidden="true"></div>
+    <div class="landing-ring" aria-hidden="true"></div>
+    <div class="landing-scanline" aria-hidden="true"></div>
 
-  <main class="stage">
-    <p class="label-top">DAEGU DONG-GU · DIGITAL LANDMARK PROJECT</p>
-
-    <p class="line-sub">다시 빛나는</p>
-
-    <div class="line-main" role="heading" aria-level="1">
-      <span class="word-east">동(EAST)</span>
-      <span class="divider-dash">—</span>
-      <span class="word-sphere">구(SPHERE)</span>
+    <div class="landing-stage">
+      <p class="ld-label">DAEGU DONG-GU &nbsp;·&nbsp; DIGITAL LANDMARK PROJECT</p>
+      <p class="ld-sub">다시 빛나는</p>
+      <div class="ld-main" role="heading" aria-level="1">
+        <span class="ld-east">동(EAST)</span>
+        <span class="ld-dash">—</span>
+        <span class="ld-sphere">구(SPHERE)</span>
+      </div>
+      <button class="ld-scroll" id="ldScrollBtn" aria-label="제안서 내용으로 스크롤">
+        <span class="ld-scroll-text">SCROLL</span>
+        <div class="ld-scroll-arrow" aria-hidden="true"></div>
+      </button>
     </div>
+  </section>
 
-    <p class="line-desc">금호강 관광벨트 · 동촌유원지 수변광장 · 직경 약 5m 구형 디지털 랜드마크</p>
-
-    <div class="cta-wrap">
-      <a href="main.html" class="btn-enter">제안서 보기 →</a>
-      <a href="main.html#contact" class="btn-skip">문의하기</a>
+  <!-- ══════════════════════════════
+       NAV (fixed, 랜딩 지나면 등장)
+  ══════════════════════════════ -->
+  <nav class="nav nav-hidden" id="mainNav" role="navigation" aria-label="주요 섹션 내비게이션">
+    <div class="nav-inner">
+      <a href="#landing" class="nav-logo">EAST SPHERE</a>
+      <button class="nav-toggle" aria-label="메뉴 열기" aria-expanded="false" aria-controls="navMenu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu" role="menubar">
+        <li role="none"><a href="#summary" role="menuitem">사업 개요</a></li>
+        <li role="none"><a href="#concept" role="menuitem">사업 개념</a></li>
+        <li role="none"><a href="#location" role="menuitem">위치 제안</a></li>
+        <li role="none"><a href="#functions" role="menuitem">주요 기능</a></li>
+        <li role="none"><a href="#budget" role="menuitem">예산</a></li>
+        <li role="none"><a href="#roadmap" role="menuitem">추진 계획</a></li>
+        <li role="none"><a href="#contact" role="menuitem">문의</a></li>
+      </ul>
     </div>
-  </main>
+    <div class="scroll-progress" id="scrollProgress" role="progressbar" aria-label="페이지 스크롤 진행도"></div>
+  </nav>
 
-  <p class="footer-credit">OREUM Inc. &amp; DK Global &nbsp;·&nbsp; Copyright © 2026 All Rights Reserved</p>
+  <!-- ══════════════════════════════
+       HERO — Main.png 배경
+  ══════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="assets/images/Main.png" alt="동구(EAST SPHERE) 구형 디지털 랜드마크 메인 비주얼" loading="eager">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="hero-content fade-in">
+      <p class="hero-badge">대구 동구청 정책사업 제안서</p>
+      <h2 class="hero-title">
+        대구 동구<br>
+        <span class="hero-title-em">디지털 랜드마크 프로젝트</span>
+      </h2>
+      <p class="hero-desc">
+        금호강 관광벨트의 '보이는 상징'이자,<br>
+        관광·홍보·축제·공공정보를 운영하는 '디지털 거점 인프라'
+      </p>
+      <div class="hero-cta">
+        <a href="#summary" class="btn btn-primary">사업 개요 보기</a>
+        <a href="#location" class="btn btn-outline">위치 제안 보기</a>
+      </div>
+    </div>
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>스크롤</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
 
+  <!-- ══════════════════════════════
+       EXECUTIVE SUMMARY
+  ══════════════════════════════ -->
+  <section class="section section-white" id="summary">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Executive Summary</p>
+        <h2 class="section-title">사업 핵심 개요</h2>
+        <p class="section-desc">민선 9기 핵심 공약을 단 하나의 플랫폼으로 통합 실현합니다</p>
+      </div>
+      <div class="summary-key-msg fade-up">
+        <blockquote>
+          "SPHERE는 금호강 관광벨트의 <strong>'보이는 상징'</strong>이자,<br>
+          관광·홍보·축제·공공정보를 운영하는 <strong>'디지털 거점 인프라'</strong>입니다."
+        </blockquote>
+      </div>
+      <div class="summary-grid fade-up">
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">📋</div>
+          <p class="summary-label">사업명</p>
+          <p class="summary-value">동구(EAST SPHERE) 조성사업</p>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">📍</div>
+          <p class="summary-label">설치 위치</p>
+          <p class="summary-value">동촌유원지 수변광장 일원</p>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">💰</div>
+          <p class="summary-label">총사업비</p>
+          <p class="summary-value num-counter" data-target="10">0</p>
+          <p class="summary-unit">억 원</p>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">⭕</div>
+          <p class="summary-label">설치 규모</p>
+          <p class="summary-value">직경 약 5m</p>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">🏙️</div>
+          <p class="summary-label">제안 기관</p>
+          <p class="summary-value">OREUM Inc. &amp; DK Global</p>
+        </div>
+        <div class="summary-card">
+          <div class="summary-icon" aria-hidden="true">📅</div>
+          <p class="summary-label">운영 형태</p>
+          <p class="summary-value">365일 상시 운영</p>
+        </div>
+      </div>
+      <div class="summary-functions fade-up">
+        <h3 class="sub-title">핵심 운영 기능</h3>
+        <div class="tag-group" role="list">
+          <span class="tag" role="listitem">관광 안내</span>
+          <span class="tag" role="listitem">축제 홍보</span>
+          <span class="tag" role="listitem">실시간 중계</span>
+          <span class="tag" role="listitem">시민 참여</span>
+          <span class="tag" role="listitem">공공정보 송출</span>
+          <span class="tag" role="listitem">미디어아트</span>
+          <span class="tag" role="listitem">야간경관</span>
+          <span class="tag" role="listitem">스마트도시 연계</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY NOW -->
+  <section class="section section-navy" id="why">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label light">Why Now</p>
+        <h2 class="section-title light">지금, 동구(EAST SPHERE)가 필요한 이유</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card fade-up">
+          <div class="why-num" aria-hidden="true">01</div>
+          <h3>금호강 관광벨트 조성 흐름</h3>
+          <p>'금호강 르네상스'(총사업비 5,400억) 사업이 진행 중입니다. 하드웨어 기반 수변 정비가 완료되어 가는 시점에, 시민과 방문객이 실제로 체류하고 경험할 <strong>소프트웨어형 콘텐츠 인프라</strong>가 필요한 단계입니다.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-num" aria-hidden="true">02</div>
+          <h3>동촌유원지의 수변관광 거점성</h3>
+          <p>동촌유원지는 금호강 관광벨트의 핵심 공간입니다. 정비된 수변광장에 시민이 머무는 <strong>이유(why to visit)</strong>를 만드는 것이 방문객 체류 시간 증가와 지역 상권 활성화로 이어질 수 있습니다.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-num" aria-hidden="true">03</div>
+          <h3>대구 동쪽 관문으로서 상징성</h3>
+          <p>동구는 대구의 동쪽 관문이자 공항 후적지 개발의 핵심 지역입니다. 장기 개발 이전 단계에서 <strong>시민이 체감할 수 있는 선도형 프로젝트</strong>로 동구의 변화 이미지를 구축할 수 있습니다.</p>
+        </div>
+        <div class="why-card fade-up">
+          <div class="why-num" aria-hidden="true">04</div>
+          <h3>낮과 밤 모두 활용 가능한 인프라 필요</h3>
+          <p>관광 랜드마크는 특정 시간대에만 기능하는 구조물이 아니라, <strong>365일·24시간 운영 가능한 디지털 미디어 플랫폼</strong>이어야 지속적인 방문 동기를 형성할 수 있습니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONCEPT -->
+  <section class="section section-white" id="concept">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Concept</p>
+        <h2 class="section-title">사업 개념 정의</h2>
+        <p class="section-desc">지역명 자체를 브랜드화한 시민 친화형 프로젝트</p>
+      </div>
+      <div class="concept-wrap">
+        <div class="concept-naming fade-up">
+          <div class="concept-eq">
+            <div class="concept-word">
+              <span class="concept-ko">동구</span>
+              <span class="concept-divider">=</span>
+              <span class="concept-en-word">EAST</span>
+              <span class="concept-plus">+</span>
+              <span class="concept-en-word">SPHERE</span>
+            </div>
+            <div class="concept-sub-row">
+              <div class="concept-item">
+                <p class="concept-item-label">행정구역명</p>
+                <p class="concept-item-desc">'살기 좋은 동구'의<br>언어유희 기반 브랜딩</p>
+              </div>
+              <div class="concept-item">
+                <p class="concept-item-label">대구 동쪽 관문</p>
+                <p class="concept-item-desc">동구의 지역 정체성과<br>방향성을 표현</p>
+              </div>
+              <div class="concept-item">
+                <p class="concept-item-label">원구형 디지털 랜드마크</p>
+                <p class="concept-item-desc">구형(球形) 형태의<br>미디어 플랫폼</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="concept-visual fade-up">
+          <img src="assets/images/Main.png" alt="동구(EAST SPHERE) 구형 디지털 미디어 랜드마크 개념 이미지" loading="lazy">
+          <div class="concept-caption">
+            <p>직경 약 5m 규모의 구형 디지털 랜드마크</p>
+            <p>단순 조형물이 아닌 <strong>운영 가능한 미디어 거점</strong></p>
+          </div>
+        </div>
+      </div>
+      <div class="concept-points fade-up">
+        <div class="concept-point">
+          <h3>정책 브랜드로서의 가능성</h3>
+          <p>'동구(EAST SPHERE)'는 지역명을 영문으로 확장한 네이밍으로, 공공 캠페인·축제·홍보물에 일관되게 활용할 수 있는 정책 브랜드입니다. '살기 좋은 동(east)-구(sphere)'라는 슬로건과 연계하면 시민 친화적 정책 이미지 구축에 기여할 수 있습니다.</p>
+        </div>
+        <div class="concept-point">
+          <h3>시설의 정의</h3>
+          <p>동구(EAST SPHERE)는 관광 안내·축제 홍보·실시간 중계·시민 참여 콘텐츠를 운영하는 <strong>미디어 거점</strong>으로 정의합니다. 단순 야간 조형물이 아니라, 낮과 밤 모두 공공 정보와 문화 콘텐츠를 제공하는 디지털 플랫폼입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="section section-light" id="location">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Location Proposal</p>
+        <h2 class="section-title">위치 제안</h2>
+        <p class="section-desc">금호강 관광벨트의 중심 — 동촌유원지 수변광장 일원</p>
+      </div>
+      <div class="location-main fade-up">
+        <div class="location-img-wrap">
+          <img src="assets/images/11.png" alt="동촌유원지 수변광장 일원 위치 제안 전경 — 금호강과 아양교가 조망되는 핵심 거점" loading="lazy">
+          <div class="location-pin" aria-hidden="true">
+            <div class="pin-dot"></div>
+            <div class="pin-pulse"></div>
+            <span class="pin-label">EAST SPHERE<br>설치 예정지</span>
+          </div>
+        </div>
+      </div>
+      <div class="location-reasons fade-up">
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">🌊</div><h3>금호강 조망성</h3><p>금호강과 아양교가 한눈에 보이는 핵심 거점으로, 수변경관과 함께 랜드마크 효과가 극대화됩니다.</p></div>
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">🔗</div><h3>관광벨트 연계성</h3><p>아양교·동촌유원지·수변 산책로와 유기적으로 연결되어 관광벨트 전체의 체류 동기를 강화합니다.</p></div>
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">🅿️</div><h3>접근성</h3><p>수변 산책로, 잔디광장, 주차장과 인접해 있어 시민과 방문객의 접근이 용이한 위치입니다.</p></div>
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">🏙️</div><h3>랜드마크 가시성</h3><p>개방된 수변광장에 설치되어 원거리에서도 식별 가능하고, 포토스폿으로서 SNS 확산 효과를 기대할 수 있습니다.</p></div>
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">🚌</div><h3>시민 접근성</h3><p>대중교통·자전거 도로와 인접해 있어 주민 생활권과 연결된 일상 속 공공 미디어 공간으로 기능합니다.</p></div>
+        <div class="location-card"><div class="lc-icon" aria-hidden="true">⭐</div><h3>관광벨트 거점성</h3><p>금호강 관광벨트의 중심부에 위치해 관광·홍보·행사 정보를 집약적으로 전달하는 거점 역할이 가능합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FUNCTIONS -->
+  <section class="section section-white" id="functions">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Main Functions</p>
+        <h2 class="section-title">주요 운영 기능</h2>
+        <p class="section-desc">단순 조형물이 아닌, 운영 가능한 디지털 미디어 플랫폼입니다</p>
+      </div>
+      <div class="functions-grid">
+        <div class="func-card fade-up" style="--delay:0s"><div class="func-img"><img src="assets/images/1.png" alt="미디어아트 콘텐츠" loading="lazy"></div><div class="func-body"><span class="func-num">01</span><h3>미디어아트 콘텐츠</h3><p>계절·이슈에 맞춘 미디어아트를 운영해 예술적 감성과 공공 공간의 가치를 동시에 높입니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.07s"><div class="func-img"><img src="assets/images/2.png" alt="관광안내 및 공공정보" loading="lazy"></div><div class="func-body"><span class="func-num">02</span><h3>관광안내 및 공공정보</h3><p>날씨·교통·행사 안내와 동구 주요 명소 정보를 실시간으로 제공하는 공공 미디어 역할을 수행합니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.14s"><div class="func-img"><img src="assets/images/3.png" alt="실시간 중계 송출" loading="lazy"></div><div class="func-body"><span class="func-num">03</span><h3>실시간 중계 송출</h3><p>축제·공연 현장을 실시간으로 중계해 현장에 오지 못한 시민도 함께 행사를 즐길 수 있도록 합니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.21s"><div class="func-img"><img src="assets/images/4.png" alt="시민참여 콘텐츠" loading="lazy"></div><div class="func-body"><span class="func-num">04</span><h3>시민참여 콘텐츠</h3><p>SNS 연동·공모전·캠페인을 통해 시민이 직접 콘텐츠를 채우는 참여형 미디어 플랫폼으로 운영합니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.28s"><div class="func-img"><img src="assets/images/5.png" alt="자연·생태 콘텐츠" loading="lazy"></div><div class="func-body"><span class="func-num">05</span><h3>자연·생태 콘텐츠</h3><p>금호강의 생태·계절 변화를 콘텐츠화해 환경 친화적 도시 이미지와 생태 교육 기능을 동시에 제공합니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.35s"><div class="func-img"><img src="assets/images/6.png" alt="스마트도시 연계" loading="lazy"></div><div class="func-body"><span class="func-num">06</span><h3>스마트도시 연계</h3><p>생활정보·안전·공공정보를 통합 송출해 스마트도시 인프라로서의 역할을 수행할 수 있습니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.42s"><div class="func-img"><img src="assets/images/7.png" alt="축제·행사 홍보" loading="lazy"></div><div class="func-body"><span class="func-num">07</span><h3>축제·행사 홍보</h3><p>동구 축제·문화행사 정보를 상시 노출해 행사 홍보 채널을 확보하고 방문객 유입 동기를 강화합니다.</p></div></div>
+        <div class="func-card fade-up" style="--delay:.49s"><div class="func-img"><img src="assets/images/8.png" alt="야간경관 콘텐츠" loading="lazy"></div><div class="func-body"><span class="func-num">08</span><h3>야간경관 콘텐츠</h3><p>야간 조명과 미디어아트가 어우러진 경관을 연출해 금호강 수변의 야간 명소로 자리잡을 수 있습니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAY & NIGHT -->
+  <section class="section section-navy" id="daynight">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label light">Day &amp; Night</p>
+        <h2 class="section-title light">낮과 밤, 365일 운영</h2>
+        <p class="section-desc light">야간경관물이 아닙니다. 낮에도, 밤에도 기능하는 디지털 공공 인프라입니다</p>
+      </div>
+      <div class="daynight-wrap fade-up">
+        <div class="daynight-panel day">
+          <div class="dn-header"><span class="dn-badge">☀️ DAY</span><h3>조형적 가치 + 공공 정보</h3><p>주변 자연을 반사하고 유려한 패턴을 보여주는 심미적 상징물</p></div>
+          <div class="dn-img"><img src="assets/images/9.png" alt="낮 시간대 운영 — 관광안내, 공공정보, 자연생태 콘텐츠" loading="lazy"></div>
+          <ul class="dn-list" role="list">
+            <li role="listitem">날씨·교통·행사 안내</li>
+            <li role="listitem">금호강 생태·관광 콘텐츠</li>
+            <li role="listitem">동구 주요 명소 홍보</li>
+            <li role="listitem">실시간 SNS 소통 콘텐츠</li>
+            <li role="listitem">시민참여 캠페인</li>
+          </ul>
+        </div>
+        <div class="daynight-panel night">
+          <div class="dn-header"><span class="dn-badge">🌙 NIGHT</span><h3>경관 특화 + 미디어아트</h3><p>야간 경관 조명과 미디어아트가 어우러진 특별한 낭만 스폿</p></div>
+          <div class="dn-img"><img src="assets/images/10.png" alt="야간 운영 — 미디어아트, 축제 콘텐츠, 야간 포토스폿" loading="lazy"></div>
+          <ul class="dn-list" role="list">
+            <li role="listitem">계절별 미디어아트 연출</li>
+            <li role="listitem">축제·공연 실시간 중계</li>
+            <li role="listitem">대표 포토스폿 및 야간 명소화</li>
+            <li role="listitem">금호강 수변경관 연출</li>
+            <li role="listitem">실시간 SNS 소통 / 바이럴</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section section-dark" id="video">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label light">Visual Reference</p>
+        <h2 class="section-title light">유사 사례 &amp; 운영 비전</h2>
+        <p class="section-desc light">구체형 LED 미디어아트는 이미 검증된 방향입니다</p>
+      </div>
+      <div class="video-layout fade-up">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="video-overlay-label"><span>EAST SPHERE</span><span class="vl-sub">DONG-GU · 금호강 관광벨트</span></div>
+            <!--
+            <video autoplay muted loop playsinline controls preload="metadata" aria-label="동구(EAST SPHERE) 운영 참고 영상">
+              <source src="assets/videos/east-sphere.mp4" type="video/mp4">
+              <p>브라우저가 동영상을 지원하지 않습니다.</p>
+            </video>
+            -->
+            <div class="video-coming-soon">
+              <div class="vcs-icon" aria-hidden="true">▶</div>
+              <p>운영 참고 영상</p>
+              <p class="vcs-sub">동영상 파일이 추가되면 이 영역에 표시됩니다</p>
+            </div>
+            <div class="video-gemini-cover" aria-hidden="true">
+              <div class="navy-gradient-bar"><span>EAST SPHERE</span><span>금호강 관광벨트 디지털 랜드마크</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="video-desc">
+          <div class="vd-item"><h3>이미 검증된 방향</h3><p>조성 1주년 만에 일상 속 문화 공간으로 자리잡은 구체형 LED 미디어아트 사례가 국내외에 존재합니다. 구민 참여형 메시지 송출·야외 공연 등 도시 관광·문화 활성화의 새로운 모델로 주목받고 있습니다.</p></div>
+          <div class="vd-item"><h3>동구(EAST SPHERE)의 운영 비전</h3><p>단순 설치가 아닌 지속적 콘텐츠 운영을 전제로 기획된 사업입니다. 운영사·지역기관·시민이 함께 참여하는 거버넌스 체계를 갖추어 장기적으로 활용 가능한 디지털 공공 인프라로 운영할 수 있습니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICY -->
+  <section class="section section-white" id="policy">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Policy Alignment</p>
+        <h2 class="section-title">정책 연계성</h2>
+        <p class="section-desc">상위 정책의 방향을 시민이 체감하는 실행 사업으로 연결합니다</p>
+      </div>
+      <div class="policy-note fade-up"><p>행정 관점에서 이 사업은 <strong>'조형물 설치'</strong>가 아니라, 금호강 관광벨트를 운영하는 <strong>콘텐츠 인프라 구축 사업</strong>으로 포지셔닝할 수 있습니다.</p></div>
+      <div class="policy-grid fade-up">
+        <div class="policy-card"><div class="pc-tag">정책 연계</div><h3>금호강 관광벨트</h3><p>금호강 동구 구간의 대표 미디어 거점 조성으로, 정비된 수변공간에 콘텐츠 운영 기반을 추가합니다.</p></div>
+        <div class="policy-card"><div class="pc-tag">관광 활성화</div><h3>동촌유원지 문화관광</h3><p>수변광장의 체류형 콘텐츠와 방문 이유를 강화해 관광·휴식·상권이 연계된 복합 공간으로 발전합니다.</p></div>
+        <div class="policy-card"><div class="pc-tag">도시 브랜딩</div><h3>공항 후적지 미래비전</h3><p>대구 동쪽 관문의 변화 이미지를 선도적으로 조성해 장기 개발 전 시민 체감형 선도 프로젝트로 활용합니다.</p></div>
+        <div class="policy-card"><div class="pc-tag">스마트 인프라</div><h3>공공정보·스마트도시</h3><p>축제·재난·관광정보를 상시 송출하는 공공 미디어로 기능해 행정 메시지 전달력을 강화합니다.</p></div>
+      </div>
+      <div class="policy-eco fade-up">
+        <div class="eco-icon" aria-hidden="true">🌱</div>
+        <div><h3>친환경 설계 원칙</h3><p>금호강 하천법을 준수하고 빛 공해 최소화 등 자연생태계와 공존하는 스마트 미디어로 설계합니다. 친환경 설계를 통해 환경 관련 우려를 사전에 해소할 수 있습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUDGET -->
+  <section class="section section-light" id="budget">
+    <div class="container">
+      <div class="section-header fade-up">
+        <p class="section-label">Budget</p>
+        <h2 class="section-title">예산 구성</h2>
+        <p class="section-desc">총사업비 10억 원 — 시범사업 배분 안</p>
+      </div>
+      <div class="budget-context fade-up"><p>'금호강 르네상스'(총사업비 5,400억) 중 동촌유원지 명품하천 조성(450억)이 하드웨어 기반 사업이었다면, 본 사업은 정비된 수변에 <strong>'시민·방문객 체류'와 'SNS 바이럴' 등 도시 브랜딩에 힘을 더하는 소프트웨어 사업</strong>입니다.</p></div>
+      <div class="budget-wrap fade-up">
+        <div class="budget-chart" aria-label="예산 구성 차트">
+          <div class="budget-bars">
+            <div class="budget-bar-item"><div class="bb-label">구조물·LED 시스템</div><div class="bb-track"><div class="bb-fill" style="--pct:55%" data-pct="55"></div></div><div class="bb-value">5.5억 <span>55%</span></div></div>
+            <div class="budget-bar-item"><div class="bb-label">콘텐츠 제작·초기 운영</div><div class="bb-track"><div class="bb-fill" style="--pct:25%" data-pct="25"></div></div><div class="bb-value">2.5억 <span>25%</span></div></div>
+            <div class="budget-bar-item"><div class="bb-label">기초·전기·통신·안전 공사</div><div class="bb-track"><div class="bb-fill" style="--pct:15%" data-pct="15"></div></div><div class="bb-value">1.5억 <span>15%</span></div></div>
+            <div class="budget-bar-item"><div class="bb-label">미디어 서버·송출 시스템</div><div class="bb-track"><div class="bb-fill" style="--pct:5%" data-pct="5"></div></div><div class="bb-value">0.5억 <span>5%</span></div></div>
+          </div>
+        </div>
+        <div class="budget-table-wrap">
+          <table class="budget-table" aria-label="예산 상세 내역">
+            <caption>동구(EAST SPHERE) 조성사업 예산 상세 내역</caption>
+            <thead><tr><th scope="col">항목</th><th scope="col">금액</th><th scope="col">비율</th><th scope="col">주요 내용</th></tr></thead>
+            <tbody>
+              <tr><td>구조물·LED 시스템</td><td><strong>5.5억</strong></td><td>55%</td><td>구체 구조물, LED 모듈, 전원·제어장치</td></tr>
+              <tr><td>콘텐츠 제작·초기 운영</td><td><strong>2.5억</strong></td><td>25%</td><td>관광안내, 미디어아트, 시민참여 콘텐츠</td></tr>
+              <tr><td>기초·전기·통신·안전 공사</td><td><strong>1.5억</strong></td><td>15%</td><td>기초공사, 배선, 통신망, 안전설비 일체</td></tr>
+              <tr><td>미디어 서버·송출 시스템</td><td><strong>0.5억</strong></td><td>5%</td><td>콘텐츠 운영, 실시간 입력, 관제 시스템</td></tr>
+              <tr class="total-row"><td><strong>합 계</strong></td><td><strong>10억</strong></td><td>100%</td><td>총사업비</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="budget-note fade-up"><p>10억 원은 단순 조형물 설치비가 아니라, 금호강 관광벨트의 대표 거점에 <strong>'보이는 상징'과 '운영 가능한 디지털 미디어 플랫폼'을 함께 구축하는 통합 사업비</strong>입니다.</p></div>
+    </div>
+  </section>
+
+  <!-- EXPECTED EFFECTS -->
+  <section class="section section-white" id="effects">
+    <div class="container">
+      <div class="section-header fade-up"><p class="section-label">Expected Effects</p><h2 class="section-title">기대 효과</h2></div>
+      <div class="effects-grid">
+        <div class="effect-card fade-up" style="--delay:0s"><div class="ec-visual"><img src="assets/images/2.png" alt="관광벨트 체감도 강화" loading="lazy"></div><div class="ec-body"><span class="ec-num">01</span><h3>관광벨트 체감도 강화</h3><p>금호강 관광벨트 전체의 체감도를 높이는 대표 미디어 거점으로 기능합니다.</p></div></div>
+        <div class="effect-card fade-up" style="--delay:.07s"><div class="ec-visual"><img src="assets/images/3.png" alt="방문 동기 강화" loading="lazy"></div><div class="ec-body"><span class="ec-num">02</span><h3>방문 동기 강화</h3><p>동촌유원지를 찾아오는 이유(why to visit)를 만들어 방문객 체류 시간 증가를 기대할 수 있습니다.</p></div></div>
+        <div class="effect-card fade-up" style="--delay:.14s"><div class="ec-visual"><img src="assets/images/4.png" alt="동구 대표 랜드마크" loading="lazy"></div><div class="ec-body"><span class="ec-num">03</span><h3>동구 대표 랜드마크</h3><p>동구를 상징하는 대표 이미지를 확보해 도시 브랜딩과 SNS 바이럴 효과를 기대합니다.</p></div></div>
+        <div class="effect-card fade-up" style="--delay:.21s"><div class="ec-visual"><img src="assets/images/5.png" alt="홍보 채널 확보" loading="lazy"></div><div class="ec-body"><span class="ec-num">04</span><h3>홍보 채널 확보</h3><p>축제·행사 정보를 상시 노출해 행정 메시지 전달력과 홍보 효과를 강화합니다.</p></div></div>
+        <div class="effect-card fade-up" style="--delay:.28s"><div class="ec-visual"><img src="assets/images/6.png" alt="시민참여형 운영" loading="lazy"></div><div class="ec-body"><span class="ec-num">05</span><h3>시민참여형 운영</h3><p>시민이 직접 참여하는 공모전·캠페인을 통해 지역 공동체 의식을 높이는 플랫폼으로 기능합니다.</p></div></div>
+        <div class="effect-card fade-up" style="--delay:.35s"><div class="ec-visual"><img src="assets/images/7.png" alt="지역상권 활성화" loading="lazy"></div><div class="ec-body"><span class="ec-num">06</span><h3>지역상권 활성화</h3><p>방문객의 체류 시간 증가가 주변 상권 및 지역 경제 활성화로 이어질 수 있습니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="section section-light" id="roadmap">
+    <div class="container">
+      <div class="section-header fade-up"><p class="section-label">Roadmap</p><h2 class="section-title">추진 계획</h2><p class="section-desc">설계·제작·시범운영을 거쳐 운영 안정성을 확보합니다</p></div>
+      <div class="roadmap fade-up" role="list" aria-label="사업 추진 단계">
+        <div class="rm-step" role="listitem"><div class="rm-num" aria-hidden="true">1</div><div class="rm-body"><h3>기획·협의</h3><p>입지 확정, 행정 협의 및 기본설계</p></div><div class="rm-arrow" aria-hidden="true">→</div></div>
+        <div class="rm-step" role="listitem"><div class="rm-num" aria-hidden="true">2</div><div class="rm-body"><h3>설계·제작</h3><p>실시설계, 구조물·LED 시스템 제작</p></div><div class="rm-arrow" aria-hidden="true">→</div></div>
+        <div class="rm-step" role="listitem"><div class="rm-num" aria-hidden="true">3</div><div class="rm-body"><h3>설치·연동</h3><p>기초공사, 전기·통신, 미디어 서버 연동</p></div><div class="rm-arrow" aria-hidden="true">→</div></div>
+        <div class="rm-step" role="listitem"><div class="rm-num" aria-hidden="true">4</div><div class="rm-body"><h3>시범운영</h3><p>콘텐츠 검증, 안전점검, 시민 반응 수집</p></div><div class="rm-arrow" aria-hidden="true">→</div></div>
+        <div class="rm-step" role="listitem"><div class="rm-num" aria-hidden="true">5</div><div class="rm-body"><h3>정식운영</h3><p>축제·공공정보·시민참여 콘텐츠 확대/바이럴</p></div></div>
+      </div>
+      <div class="governance fade-up">
+        <h3>운영 거버넌스</h3>
+        <div class="gov-grid">
+          <div class="gov-card"><div class="gov-role">동구청</div><p>정책·예산·홍보 총괄</p></div>
+          <div class="gov-card"><div class="gov-role">운영사</div><p>콘텐츠 편성·시스템 관제</p></div>
+          <div class="gov-card"><div class="gov-role">지역기관</div><p>축제·행사·관광 콘텐츠 연계</p></div>
+          <div class="gov-card"><div class="gov-role">시민</div><p>참여 콘텐츠·공모전·캠페인 참여</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="section closing" id="closing">
+    <div class="closing-bg">
+      <img src="assets/images/Main.png" alt="" role="presentation" loading="lazy">
+      <div class="closing-overlay"></div>
+    </div>
+    <div class="container closing-content fade-up">
+      <p class="closing-quote-attr">— 우성진 대구 동구청장 당선 소감문 中</p>
+      <blockquote class="closing-mayor-quote">"소외되고 낙후된 도시에서 벗어나<br>대구의 새로운 미래를 열어갈<br>금호강 시대의 중심도시로 만들겠다"</blockquote>
+      <div class="closing-divider" aria-hidden="true"></div>
+      <p class="closing-proposal">동구(EAST SPHERE)는 금호강 관광벨트의 미래 이미지를<br>시민이 직접 체감할 수 있게 만드는<br><strong>선도형 디지털 관광 인프라</strong>입니다.</p>
+      <p class="closing-slogan">다시 빛나는 <em>'살기 좋은'</em><br><strong>동(east)-구(sphere)</strong></p>
+      <p class="closing-final">금호강에 새로운 동구의 상징을 제안합니다.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-navy contact-section" id="contact">
+    <div class="container">
+      <div class="section-header fade-up"><p class="section-label light">Contact</p><h2 class="section-title light">문의 및 협의</h2></div>
+      <div class="contact-wrap fade-up">
+        <div class="contact-info">
+          <p class="contact-org">OREUM Inc. &amp; DK Global</p>
+          <div class="contact-emails">
+            <a href="mailto:narrsis01@gmail.com" class="contact-email">narrsis01@gmail.com</a>
+            <a href="mailto:eastsea.chae@gmail.com" class="contact-email">eastsea.chae@gmail.com</a>
+          </div>
+          <p class="contact-note">본 제안서와 관련한 추가 자료 제공, 현장 설명, 정책 협의를 위한 미팅을 언제든지 요청해 주시면 성실히 준비하겠습니다.</p>
+        </div>
+        <div class="contact-badge">
+          <p class="cb-title">Proposed by</p>
+          <p class="cb-name">OREUM Inc. &amp; DK Global</p>
+          <p class="cb-copy">Copyright © 2026 OREUM Inc. All Rights Reserved</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="js/main.js"></script>
   <script>
-    /* ── 별 파티클 캔버스 ── */
-    (function () {
-      const canvas = document.getElementById('starCanvas');
-      const ctx = canvas.getContext('2d');
-      let W, H, stars = [];
+  /* ── 별 파티클 (랜딩 전용) ── */
+  (function () {
+    var canvas = document.getElementById('starCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H, stars = [], raf;
 
-      function resize() {
-        W = canvas.width  = window.innerWidth;
-        H = canvas.height = window.innerHeight;
+    function resize() {
+      W = canvas.width  = canvas.parentElement.offsetWidth;
+      H = canvas.height = canvas.parentElement.offsetHeight;
+    }
+
+    function init(n) {
+      stars = [];
+      for (var i = 0; i < n; i++) {
+        stars.push({ x: Math.random()*W, y: Math.random()*H, r: Math.random()*1.1+.2,
+                     speed: Math.random()*.004+.001, phase: Math.random()*Math.PI*2 });
       }
+    }
 
-      function initStars(n) {
-        stars = [];
-        for (let i = 0; i < n; i++) {
-          stars.push({
-            x: Math.random() * W,
-            y: Math.random() * H,
-            r: Math.random() * 1.2 + 0.2,
-            a: Math.random(),
-            speed: Math.random() * 0.004 + 0.001,
-            phase: Math.random() * Math.PI * 2
-          });
-        }
+    var frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      frame++;
+      for (var i = 0; i < stars.length; i++) {
+        var s = stars[i];
+        var a = (Math.sin(frame * s.speed + s.phase) + 1) / 2;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+        ctx.fillStyle = 'rgba(200,180,120,' + (a*.65+.1) + ')';
+        ctx.fill();
       }
+      raf = requestAnimationFrame(draw);
+    }
 
-      let frame = 0;
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        frame++;
-        stars.forEach(function (s) {
-          const alpha = (Math.sin(frame * s.speed + s.phase) + 1) / 2;
-          ctx.beginPath();
-          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(200,180,120,' + (alpha * 0.7 + 0.1) + ')';
-          ctx.fill();
-        });
-        requestAnimationFrame(draw);
+    resize(); init(200); draw();
+    window.addEventListener('resize', function () { resize(); init(200); });
+
+    /* 랜딩 영역을 벗어나면 애니메이션 정지 */
+    window.addEventListener('scroll', function () {
+      var lh = document.getElementById('landing').offsetHeight;
+      if (window.scrollY > lh + 100) {
+        cancelAnimationFrame(raf); raf = null;
+      } else if (!raf) {
+        draw();
       }
+    }, { passive: true });
+  })();
 
-      resize();
-      initStars(220);
-      draw();
-      window.addEventListener('resize', function () {
-        resize();
-        initStars(220);
-      });
-    })();
+  /* ── 스크롤 버튼: 히어로 섹션으로 이동 ── */
+  var ldBtn = document.getElementById('ldScrollBtn');
+  if (ldBtn) {
+    ldBtn.addEventListener('click', function () {
+      var hero = document.getElementById('hero');
+      if (hero) hero.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  /* ── 랜딩 지나면 nav 등장 ── */
+  (function () {
+    var nav = document.getElementById('mainNav');
+    var landing = document.getElementById('landing');
+    if (!nav || !landing) return;
+    var threshold = landing.offsetHeight * 0.6;
+    window.addEventListener('scroll', function () {
+      if (window.scrollY > threshold) {
+        nav.classList.remove('nav-hidden');
+      } else {
+        nav.classList.add('nav-hidden');
+      }
+    }, { passive: true });
+  })();
   </script>
 </body>
 </html>
