@@ -1,0 +1,21 @@
+# 루트에 남아있는 원본 이미지 중복 파일 (assets/images/ 에 이미 포함됨)
+/1.png
+/2.png
+/3.png
+/4.png
+/5.png
+/6.png
+/7.png
+/8.png
+/9.png
+/10.png
+/11.png
+/Main.png
+
+# 원본 PDF (배포 불필요)
+*.pdf
+
+# 개발 도구
+.claude/
+*.DS_Store
+Thumbs.db
