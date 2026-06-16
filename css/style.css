@@ -188,8 +188,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   object-position: center;
 }
 .hero-bg video {
-  filter: blur(2px);
-  transform: scale(1.04);
+  filter: blur(0.5px);
+  transform: scale(1.02);
 }
 .hero-overlay {
   position: absolute;
