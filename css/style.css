@@ -180,11 +180,16 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: absolute;
   inset: 0;
 }
-.hero-bg img {
+.hero-bg img,
+.hero-bg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
+}
+.hero-bg video {
+  filter: blur(2px);
+  transform: scale(1.04);
 }
 .hero-overlay {
   position: absolute;
@@ -615,6 +620,68 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .dn-list li::before { content: '–'; color: var(--gold); font-weight: 700; flex-shrink: 0; }
 
+/* ── REFERENCE CASE STUDY ── */
+.ref-case {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(200,164,90,.25);
+  border-radius: var(--radius-lg);
+  padding: 36px 40px;
+  margin-bottom: 40px;
+}
+.ref-location {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: rgba(200,164,90,.15);
+  border: 1px solid rgba(200,164,90,.3);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 16px;
+}
+.ref-case-title {
+  font-size: clamp(20px, 3vw, 28px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 10px;
+  line-height: 1.35;
+}
+.ref-case-title strong { color: var(--gold); }
+.ref-case-source {
+  font-size: 13px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+.ref-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  border-top: 1px solid rgba(255,255,255,.1);
+  padding-top: 24px;
+}
+.ref-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+.rs-num {
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+}
+.rs-num em { font-style: normal; font-size: .65em; font-weight: 600; }
+.rs-label {
+  font-size: 11px;
+  color: rgba(255,255,255,.55);
+  line-height: 1.4;
+}
+
 /* ── VIDEO / REFERENCE ── */
 .video-layout {
   display: grid;
@@ -987,6 +1054,8 @@ caption { font-size: 0; position: absolute; clip: rect(0,0,0,0); }
   .concept-wrap { grid-template-columns: 1fr; gap: 32px; }
   .video-layout { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; }
+  .ref-stats { grid-template-columns: repeat(3, 1fr); }
+  .ref-case { padding: 24px 20px; }
 }
 
 @media (max-width: 768px) {
