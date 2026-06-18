@@ -1068,6 +1068,169 @@ caption { font-size: 0; position: absolute; clip: rect(0,0,0,0); }
 .cb-name { font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 8px; }
 .cb-copy { font-size: 11px; color: rgba(255,255,255,.3); }
 
+/* ── POLICY PROPOSER ── */
+.policy-proposer {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(200,164,90,.12);
+  border: 1px solid rgba(200,164,90,.35);
+  border-radius: 30px;
+  padding: 8px 20px 8px 14px;
+  margin-bottom: 28px;
+}
+.pp-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  color: var(--navy);
+  background: var(--gold);
+  border-radius: 20px;
+  padding: 3px 10px;
+}
+.pp-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+/* ── REF DISCLAIMER ── */
+.ref-disclaimer {
+  margin-top: 24px;
+  padding: 18px 24px;
+  background: rgba(200,164,90,.08);
+  border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.ref-disclaimer p {
+  font-size: 13px;
+  color: rgba(255,255,255,.75);
+  line-height: 1.7;
+}
+.ref-disclaimer p strong { color: var(--gold); }
+
+/* ── ARTIST COLLAB ── */
+.artist-collab {
+  position: relative;
+  background: linear-gradient(135deg, #0d1f3c 0%, #162a50 50%, #0d1f3c 100%);
+  border: 1px solid rgba(200,164,90,.3);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  margin: 40px 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.artist-collab::before {
+  content: '🎨';
+  position: absolute;
+  font-size: 180px;
+  opacity: .04;
+  top: -20px;
+  right: -20px;
+  pointer-events: none;
+}
+.ac-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .14em;
+  color: var(--gold);
+  background: rgba(200,164,90,.15);
+  border: 1px solid rgba(200,164,90,.3);
+  border-radius: 20px;
+  padding: 4px 14px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.ac-title {
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.ac-title em { color: var(--gold); font-style: normal; }
+.ac-desc {
+  font-size: 15px;
+  color: rgba(255,255,255,.65);
+  line-height: 1.8;
+  max-width: 680px;
+  margin: 0 auto 28px;
+}
+.ac-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+.ac-pill {
+  font-size: 13px;
+  color: var(--white);
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 20px;
+  padding: 6px 16px;
+  transition: background .3s, border-color .3s;
+}
+.ac-pill:hover { background: rgba(200,164,90,.2); border-color: rgba(200,164,90,.5); }
+@keyframes acPulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(200,164,90,.3); }
+  50% { box-shadow: 0 0 0 12px rgba(200,164,90,0); }
+}
+.artist-collab { animation: acPulse 4s ease-in-out infinite; }
+
+/* ── PROPOSER FINAL (마지막 페이지) ── */
+.proposer-section {
+  background: var(--navy);
+  padding: 100px 0;
+  text-align: center;
+}
+.proposer-kicker {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--gold);
+  background: rgba(200,164,90,.12);
+  border: 1px solid rgba(200,164,90,.3);
+  border-radius: 20px;
+  padding: 5px 16px;
+  margin-bottom: 32px;
+  text-transform: uppercase;
+}
+.proposer-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  color: rgba(255,255,255,.45);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.proposer-name {
+  font-size: clamp(20px, 3vw, 32px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+.proposer-name em { color: var(--gold); font-style: normal; }
+.proposer-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,.5);
+  margin-bottom: 48px;
+}
+.proposer-divider {
+  width: 48px;
+  height: 1px;
+  background: rgba(200,164,90,.4);
+  margin: 0 auto 40px;
+}
+.proposer-note {
+  font-size: 14px;
+  color: rgba(255,255,255,.4);
+  line-height: 1.8;
+}
+
 /* ── 반응형 ── */
 @media (max-width: 1024px) {
   .container { padding: 0 28px; }
