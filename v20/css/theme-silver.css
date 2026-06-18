@@ -26,13 +26,13 @@
 }
 
 /* ── 2. body / base ── */
-body { background: #030810; }
+body { background: #030810 !important; }
 
 /* ── 3. 섹션 배경 — 전체 다크 ── */
-.section-white { background: #060e1c; }
-.section-light { background: #050c18; }
-.section-navy  { background: #030810; }
-.section-dark  { background: #020509; }
+.section-white { background: #060e1c !important; }
+.section-light { background: #050c18 !important; }
+.section-navy  { background: #030810 !important; }
+.section-dark  { background: #020509 !important; }
 
 /* 섹션 타이틀: 그래디언트 텍스트 */
 .section-title {
