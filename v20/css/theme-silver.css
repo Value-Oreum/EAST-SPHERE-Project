@@ -1,0 +1,102 @@
+/* ── 20억 버전 실버 테마 오버라이드 ──
+   골드(#c8a45a / rgba(200,164,90,x)) → 실버(#a8c4d8 / rgba(168,196,216,x))
+   base: style.css 이후 로드 */
+
+:root {
+  --gold: #a8c4d8;
+  --gold-hover: #bdd3e4;
+}
+
+/* section-label light */
+.section-label.light {
+  background: rgba(168,196,216,.12);
+}
+
+/* nav kicker / hero-tag border */
+.hero-tag,
+.pc-tag {
+  border-color: rgba(168,196,216,.4);
+}
+
+/* btn-primary hover glow */
+.btn-primary:hover {
+  box-shadow: 0 8px 24px rgba(168,196,216,.35);
+}
+
+/* why-num decorative */
+.why-num {
+  color: rgba(168,196,216,.25);
+}
+
+/* pin pulse */
+.pin-pulse {
+  background: rgba(168,196,216,.4);
+}
+
+/* dn-badge */
+.dn-badge {
+  background: rgba(168,196,216,.12);
+}
+
+/* ref-case border */
+.ref-case {
+  border-color: rgba(168,196,216,.25);
+}
+
+/* ref-location badge */
+.ref-location {
+  background: rgba(168,196,216,.15);
+  border-color: rgba(168,196,216,.3);
+}
+
+/* mayor quote decorative " */
+.mayor-quote-section::before {
+  color: rgba(168,196,216,.06);
+}
+
+/* policy-proposer badge */
+.policy-proposer {
+  background: rgba(168,196,216,.12);
+  border-color: rgba(168,196,216,.35);
+}
+
+/* ref-disclaimer */
+.ref-disclaimer {
+  background: rgba(168,196,216,.08);
+}
+
+/* artist-collab border + animation */
+.artist-collab {
+  border-color: rgba(168,196,216,.3);
+  animation: acPulseSilver 4s ease-in-out infinite;
+}
+@keyframes acPulseSilver {
+  0%,100% { box-shadow: 0 0 0 0 rgba(168,196,216,.3); }
+  50%      { box-shadow: 0 0 0 12px rgba(168,196,216,0); }
+}
+
+/* ac-badge */
+.ac-badge {
+  background: rgba(168,196,216,.15);
+  border-color: rgba(168,196,216,.3);
+}
+
+/* ac-pill hover */
+.ac-pill:hover {
+  background: rgba(168,196,216,.2);
+  border-color: rgba(168,196,216,.5);
+}
+
+/* proposer-kicker */
+.proposer-kicker {
+  background: rgba(168,196,216,.12);
+  border-color: rgba(168,196,216,.3);
+}
+
+/* proposer-divider */
+.proposer-divider {
+  background: rgba(168,196,216,.4);
+}
+
+/* landing star particles — JS에서 색상 변경을 위한 data attr 신호 */
+body { --theme-particle: "168,196,216"; }
