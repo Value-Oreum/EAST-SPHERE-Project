@@ -1301,3 +1301,49 @@ caption { font-size: 0; position: absolute; clip: rect(0,0,0,0); }
   .container { max-width: 1320px; }
   .functions-grid { grid-template-columns: repeat(4, 1fr); }
 }
+
+/* ── 모바일 보완 패치 ── */
+@media (max-width: 768px) {
+  .summary-key-msg { padding: 24px 20px; }
+  .summary-key-msg blockquote { font-size: 15px; }
+  .ref-case { padding: 24px 20px; }
+  .budget-context { padding: 16px 18px; font-size: 14px; }
+  .budget-note { padding: 20px 20px; font-size: 14px; }
+  .why-card { padding: 24px 20px; }
+  .effect-card { padding: 28px 24px; }
+  .mayor-quote-section { padding: 72px 20px; }
+  .artist-collab { padding: 32px 20px; }
+  .proposer-section { padding: 64px 0; }
+  .concept-eq .concept-sub-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .section { padding: 48px 0; }
+  .container { padding: 0 16px; }
+  .section-header { margin-bottom: 28px; }
+  .hero-content { padding: 80px 16px 48px; }
+  .ref-stats { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .summary-key-msg { padding: 20px 16px; }
+  .summary-key-msg blockquote { font-size: 14px; line-height: 1.7; }
+  .ref-case { padding: 18px 16px; }
+  .budget-context { padding: 14px 16px; font-size: 13px; }
+  .budget-note { padding: 18px 16px; font-size: 13px; }
+  .budget-table { font-size: 13px; }
+  .budget-table th { padding: 10px 10px; font-size: 13px; }
+  .budget-table td { padding: 10px 10px; font-size: 13px; }
+  .budget-table td strong { font-size: 15px; }
+  .total-row td { font-size: 14px; }
+  .why-card { padding: 20px 16px; }
+  .effect-card { padding: 24px 16px; }
+  .policy-card { padding: 20px 16px; }
+  .concept-point { padding: 18px 16px; }
+  .artist-collab { padding: 28px 16px; }
+  .mayor-quote-section { padding: 56px 16px; }
+  .location-card { padding: 18px 16px; }
+  .gov-card { padding: 14px 12px; }
+  .mq-text { font-size: clamp(18px, 5vw, 26px); line-height: 1.7; }
+  .closing-content { padding: 48px 16px; }
+  .contact-wrap { gap: 24px; }
+  .proposer-section { padding: 48px 0; }
+  .nav-inner { padding: 0 16px; height: 56px; }
+}
