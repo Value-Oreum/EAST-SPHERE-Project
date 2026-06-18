@@ -1,102 +1,350 @@
-/* ── 20억 버전 실버 테마 오버라이드 ──
-   골드(#c8a45a / rgba(200,164,90,x)) → 실버(#a8c4d8 / rgba(168,196,216,x))
-   base: style.css 이후 로드 */
+/* ═══════════════════════════════════════════════════════
+   EAST SPHERE × 20억 — OBSIDIAN LUXE THEME
+   골드(#c8a45a) → 샴페인 골드(#c4a868)
+   모든 섹션 다크 전환 + 글래스모피즘 카드
+   ═══════════════════════════════════════════════════════ */
 
+/* ── 1. CSS 변수 재정의 ── */
 :root {
-  --gold: #a8c4d8;
-  --gold-hover: #bdd3e4;
+  --gold:       #c4a868;
+  --gold-dim:   rgba(196,168,104,.12);
+  --gold-glow:  rgba(196,168,104,.25);
+  --navy:       #060f1c;
+  --navy-alt:   #0a1828;
+  --navy-card:  rgba(255,255,255,.045);
+  --navy-mid:   #0f2240;
+  --white:      #eee9e0;
+  --gray-bg:    #0d1e30;
+  --gray-light: rgba(255,255,255,.08);
+  --text:       #ddd5c8;
+  --text-sub:   rgba(221,213,200,.55);
+  --shadow-sm:  0 2px 12px rgba(0,0,0,.3);
+  --shadow-md:  0 8px 32px rgba(0,0,0,.4);
+  --shadow-lg:  0 20px 60px rgba(0,0,0,.5);
 }
 
-/* section-label light */
-.section-label.light {
-  background: rgba(168,196,216,.12);
-}
+/* ── 2. body 배경 ── */
+body { background: #060f1c; }
 
-/* nav kicker / hero-tag border */
-.hero-tag,
-.pc-tag {
-  border-color: rgba(168,196,216,.4);
-}
+/* ── 3. 섹션 배경 — 모두 다크 ── */
+.section-white { background: #0a1828; }
+.section-light { background: #0d1e30; }
+.section-navy  { background: #060f1c; }
+.section-dark  { background: #040b15; }
 
-/* btn-primary hover glow */
+/* 섹션 타이틀/라벨 — 다크 배경용 */
+.section-title       { color: var(--white); }
+.section-label       { color: var(--gold); background: rgba(196,168,104,.1); }
+.section-label.light { color: var(--gold); background: rgba(196,168,104,.1); }
+.section-desc        { color: rgba(221,213,200,.65); }
+
+/* ── 4. 네비게이션 ── */
+.nav {
+  background: rgba(6,15,28,.0);
+  border-bottom: 1px solid transparent;
+}
+.nav.scrolled {
+  background: rgba(6,15,28,.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(196,168,104,.15);
+  box-shadow: 0 2px 24px rgba(0,0,0,.4);
+}
+.nav-logo .logo-text { color: var(--white); }
+.nav-menu a { color: rgba(221,213,200,.7); }
+.nav-menu a:hover { color: var(--white); background: rgba(255,255,255,.06); }
+.nav-toggle span { background: var(--white); }
+
+/* ── 5. 히어로 섹션 강화 ── */
+.hero-overlay {
+  background: linear-gradient(
+    160deg,
+    rgba(4,10,20,.88) 0%,
+    rgba(6,15,28,.72) 50%,
+    rgba(10,24,40,.82) 100%
+  );
+}
+.hero-tag {
+  color: var(--gold);
+  border-color: rgba(196,168,104,.4);
+  background: rgba(196,168,104,.08);
+  letter-spacing: .14em;
+}
+.hero-title { color: #fff; text-shadow: 0 2px 40px rgba(0,0,0,.5); }
+.hero-desc  { color: rgba(255,255,255,.72); }
+
+/* ── 6. 버튼 ── */
+.btn-primary {
+  background: linear-gradient(135deg, #c4a868 0%, #d4bc80 100%);
+  color: #060f1c;
+  font-weight: 700;
+  letter-spacing: .06em;
+  box-shadow: 0 4px 20px rgba(196,168,104,.3);
+}
 .btn-primary:hover {
-  box-shadow: 0 8px 24px rgba(168,196,216,.35);
+  background: linear-gradient(135deg, #d4bc80 0%, #e0cc96 100%);
+  box-shadow: 0 8px 32px rgba(196,168,104,.45);
+  transform: translateY(-2px);
+}
+.btn-secondary {
+  color: var(--gold);
+  border-color: rgba(196,168,104,.45);
+}
+.btn-secondary:hover {
+  background: rgba(196,168,104,.1);
+  border-color: var(--gold);
 }
 
-/* why-num decorative */
-.why-num {
-  color: rgba(168,196,216,.25);
+/* ── 7. 서머리/요약 카드 ── */
+.summary-grid .summary-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.summary-key-msg {
+  background: rgba(196,168,104,.08);
+  border: 1px solid rgba(196,168,104,.2);
+}
+.summary-key-msg blockquote { color: var(--white); }
+.summary-key-msg blockquote strong { color: var(--gold); }
+
+/* ── 8. WHY 카드 — 글래스모피즘 ── */
+.why-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.why-card:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(196,168,104,.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+}
+.why-num { color: rgba(196,168,104,.2); }
+
+/* ── 9. 함수/기능 카드 ── */
+.fn-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.fn-card:hover {
+  background: rgba(255,255,255,.07);
+  border-color: rgba(196,168,104,.25);
+  box-shadow: 0 8px 28px rgba(0,0,0,.35);
+}
+.fn-card h3 { color: var(--white); }
+.fn-card p  { color: rgba(221,213,200,.65); }
+
+/* ── 10. 정책 카드 (section-light 위) ── */
+.policy-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.policy-card:hover {
+  border-color: rgba(196,168,104,.25);
+  box-shadow: 0 8px 28px rgba(0,0,0,.3);
+}
+.policy-card h3 { color: var(--white); }
+.policy-card p  { color: rgba(221,213,200,.6); }
+.pc-tag {
+  color: var(--gold);
+  background: rgba(196,168,104,.12);
 }
 
-/* pin pulse */
-.pin-pulse {
-  background: rgba(168,196,216,.4);
+/* 친환경 설계 박스 */
+.policy-eco {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
 }
+.policy-eco h3 { color: var(--gold); }
+.policy-eco p  { color: rgba(221,213,200,.65); }
 
-/* dn-badge */
-.dn-badge {
-  background: rgba(168,196,216,.12);
+/* ── 11. 예산 섹션 ── */
+.budget-context {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  color: var(--text);
 }
+.budget-context strong { color: var(--gold); }
 
-/* ref-case border */
+.budget-table-wrap {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.budget-table th {
+  background: rgba(196,168,104,.1);
+  color: var(--gold);
+  font-size: 13px;
+  letter-spacing: .08em;
+  border-bottom: 1px solid rgba(196,168,104,.2);
+}
+.budget-table td {
+  color: var(--text);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.budget-table td:first-child { color: var(--white); font-weight: 500; }
+.budget-table td strong      { color: var(--gold); }
+.budget-table tbody tr:hover td { background: rgba(196,168,104,.06); }
+.total-row td { background: rgba(196,168,104,.08) !important; }
+.total-row td strong { color: var(--gold) !important; font-size: 18px; }
+
+.budget-note {
+  background: rgba(196,168,104,.07);
+  border: 1px solid rgba(196,168,104,.18);
+  border-radius: 12px;
+}
+.budget-note p { color: var(--text); }
+.budget-note strong { color: var(--gold); }
+
+/* ── 12. 기대 효과 카드 ── */
+.effect-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.effect-card::before { background: var(--gold); }
+.effect-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(196,168,104,.25);
+  box-shadow: 0 20px 56px rgba(0,0,0,.45);
+}
+.ec-num { color: rgba(196,168,104,.18); }
+
+/* ── 13. 레퍼런스 섹션 ── */
 .ref-case {
-  border-color: rgba(168,196,216,.25);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(196,168,104,.2);
 }
+.ref-case-title { color: var(--white); }
+.ref-stat-val   { color: var(--gold); }
+.ref-stat-label { color: rgba(221,213,200,.55); }
 
-/* ref-location badge */
-.ref-location {
-  background: rgba(168,196,216,.15);
-  border-color: rgba(168,196,216,.3);
-}
-
-/* mayor quote decorative " */
-.mayor-quote-section::before {
-  color: rgba(168,196,216,.06);
-}
-
-/* policy-proposer badge */
-.policy-proposer {
-  background: rgba(168,196,216,.12);
-  border-color: rgba(168,196,216,.35);
-}
-
-/* ref-disclaimer */
 .ref-disclaimer {
-  background: rgba(168,196,216,.08);
+  background: rgba(196,168,104,.06);
+  border-left-color: var(--gold);
 }
+.ref-disclaimer p         { color: rgba(221,213,200,.75); }
+.ref-disclaimer p strong  { color: var(--gold); }
 
-/* artist-collab border + animation */
+/* ── 14. 로드맵 ── */
+.rm-step .rm-num {
+  background: rgba(196,168,104,.12);
+  border: 1px solid rgba(196,168,104,.3);
+  color: var(--gold);
+}
+.rm-step .rm-body h3 { color: var(--white); }
+.rm-step .rm-body p  { color: rgba(221,213,200,.6); }
+.rm-arrow { color: rgba(196,168,104,.4); }
+
+.governance {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px;
+}
+.gov-card { background: rgba(255,255,255,.05); border-color: rgba(255,255,255,.08); }
+.gov-role { color: var(--gold); }
+.gov-card p { color: rgba(221,213,200,.6); }
+
+/* ── 15. 시장 인용구 ── */
+.mayor-quote-section {
+  background: linear-gradient(160deg, #060f1c 0%, #0a1828 100%);
+}
+.mq-text { color: var(--white); }
+.mq-text em { color: var(--gold); }
+.mq-attr { color: rgba(221,213,200,.45); }
+.mq-line { background: linear-gradient(90deg, transparent, rgba(196,168,104,.4), transparent); }
+.mayor-quote-section::before { color: rgba(196,168,104,.06); }
+
+/* ── 16. 지역 작가 콜라보 ── */
 .artist-collab {
-  border-color: rgba(168,196,216,.3);
-  animation: acPulseSilver 4s ease-in-out infinite;
+  background: linear-gradient(135deg, #0a1828 0%, #0f2040 50%, #0a1828 100%);
+  border-color: rgba(196,168,104,.25);
+  animation: acPulseLuxe 4s ease-in-out infinite;
 }
-@keyframes acPulseSilver {
-  0%,100% { box-shadow: 0 0 0 0 rgba(168,196,216,.3); }
-  50%      { box-shadow: 0 0 0 12px rgba(168,196,216,0); }
+@keyframes acPulseLuxe {
+  0%,100% { box-shadow: 0 0 0 0 rgba(196,168,104,.25); }
+  50%      { box-shadow: 0 0 0 14px rgba(196,168,104,0); }
 }
-
-/* ac-badge */
 .ac-badge {
-  background: rgba(168,196,216,.15);
-  border-color: rgba(168,196,216,.3);
+  color: var(--gold);
+  background: rgba(196,168,104,.12);
+  border-color: rgba(196,168,104,.25);
 }
-
-/* ac-pill hover */
+.ac-title em { color: var(--gold); }
 .ac-pill:hover {
-  background: rgba(168,196,216,.2);
-  border-color: rgba(168,196,216,.5);
+  background: rgba(196,168,104,.15);
+  border-color: rgba(196,168,104,.45);
 }
 
-/* proposer-kicker */
+/* ── 17. Policy Proposer 배지 ── */
+.policy-proposer {
+  background: rgba(196,168,104,.1);
+  border-color: rgba(196,168,104,.3);
+}
+.pp-tag { background: var(--gold); color: #060f1c; }
+.pp-text { color: var(--gold); }
+
+/* ── 18. 클로징 섹션 ── */
+.closing-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(4,10,20,.7) 0%,
+    rgba(6,15,28,.85) 60%,
+    rgba(4,10,20,.95) 100%
+  );
+}
+.closing-proposal { color: rgba(238,233,224,.8); }
+.closing-proposal strong { color: var(--gold); }
+.closing-slogan { color: #fff; }
+.closing-slogan strong { color: var(--gold); }
+.closing-final { color: rgba(238,233,224,.5); }
+
+/* ── 19. 정책 제안자 섹션 ── */
+.proposer-section { background: linear-gradient(160deg, #060f1c 0%, #0a1828 100%); }
 .proposer-kicker {
-  background: rgba(168,196,216,.12);
-  border-color: rgba(168,196,216,.3);
+  color: var(--gold);
+  background: rgba(196,168,104,.1);
+  border-color: rgba(196,168,104,.25);
+}
+.proposer-name em { color: var(--gold); }
+.proposer-divider { background: rgba(196,168,104,.35); }
+.proposer-note { color: rgba(221,213,200,.45); }
+
+/* ── 20. 콘셉트·데이나잇 등 기타 ── */
+.concept-stat-val  { color: var(--gold); }
+.dn-badge          { color: var(--gold); background: rgba(196,168,104,.12); }
+.dn-list li::before { color: var(--gold); }
+.ref-location {
+  color: var(--gold);
+  background: rgba(196,168,104,.12);
+  border-color: rgba(196,168,104,.25);
 }
 
-/* proposer-divider */
-.proposer-divider {
-  background: rgba(168,196,216,.4);
-}
+/* ── 21. 스크롤 프로그레스 바 ── */
+#scroll-progress { background: var(--gold); }
 
-/* landing star particles — JS에서 색상 변경을 위한 data attr 신호 */
-body { --theme-particle: "168,196,216"; }
+/* ── 22. 배지 버전 표시 ── */
+body::after {
+  content: "20억 제안";
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #c4a868, #d4bc80);
+  color: #060f1c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  padding: 6px 14px;
+  border-radius: 20px;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(196,168,104,.4);
+  pointer-events: none;
+}
